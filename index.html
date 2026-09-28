@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>雪夜列車 · 聖誕節快樂</title>
+<meta name="description" content="15 秒孔版印刷風格聖誕動畫短片">
+<meta property="og:title" content="雪夜列車 · 聖誕節快樂">
+<meta property="og:description" content="15 秒孔版印刷風格聖誕動畫短片">
+<meta property="og:image" content="poster.jpg">
+<meta property="og:type" content="video.other">
+<style>
+  :root{--paper:#f4ecd9;--navy:#1f2c56;--red:#c62f3b}
+  html,body{margin:0;height:100%;background:#141a33}
+  body{display:flex;align-items:center;justify-content:center;overflow:hidden}
+  /* 以高度為主撐滿畫面，保持 9:16；手機直式時改以寬度為主 */
+  .frame{position:relative;height:100dvh;aspect-ratio:9/16;max-width:100vw}
+  video{width:100%;height:100%;object-fit:contain;display:block;background:#141a33}
+  #play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:14px 28px;border:3px solid var(--navy);border-radius:40px;
+    background:var(--paper);color:var(--red);font:700 20px "Noto Serif TC","Microsoft JhengHei","PingFang TC",serif;letter-spacing:2px;cursor:pointer;box-shadow:4px 4px 0 var(--red)}
+  #play[hidden]{display:none}
+</style>
+</head>
+<body>
+<div class="frame">
+  <!-- playsinline：iOS 不強制全螢幕；preload=metadata：沒按播放前不下載整支 18MB -->
+  <video id="v" src="xmas-train.mp4" poster="poster.jpg" playsinline preload="metadata"></video>
+  <button id="play">▶ 播放 · 開啟聲音</button>
+</div>
+<script>
+  const v=document.getElementById('v'),b=document.getElementById('play');
+  // 用按鈕觸發播放，瀏覽器才允許有聲自動播放
+  b.onclick=()=>{v.currentTime=0;v.play();b.hidden=true};
+  v.onclick=()=>{if(v.paused){v.play();b.hidden=true}else v.pause()};
+  v.onended=()=>{b.textContent='↻ 再看一次';b.hidden=false};
+</script>
+</body>
+</html>
